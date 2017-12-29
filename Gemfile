@@ -11,6 +11,7 @@ gem 'pg'
 gem 'puma', '~> 3.7'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
+gem 'simple_command'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
