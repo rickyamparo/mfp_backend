@@ -14,6 +14,7 @@ gem 'jwt'
 gem 'simple_command'
 
 group :development, :test do
+  gem 'pry'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
