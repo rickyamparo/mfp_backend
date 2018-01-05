@@ -15,7 +15,11 @@ class LocationsController < ApplicationController
 
   # POST /locations
   def create
+
     @location = Location.new(location_params)
+
+    @location.day_number = Time.now.day
+    @location.day_name = Time.now.strftime("%A")
 
     if @location.save
       render json: @location, status: :created, location: @location
