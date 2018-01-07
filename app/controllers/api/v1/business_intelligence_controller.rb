@@ -14,6 +14,12 @@ class Api::V1::BusinessIntelligenceController < ApplicationController
     render json: return_value
   end
 
+  def favorite_weekday
+  end
+
+  def favorite_weekend
+  end
+
   private
 
   def location_params
