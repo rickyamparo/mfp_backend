@@ -1,8 +1,13 @@
-User.destroy_all
-
-user = User.create(name: 'testuser', email: 'test@test.com', password: 'password')
+puts "Starting to seed Users and Locations"
+start_time = Time.now
 
 Location.destroy_all
+User.destroy_all
+
+# Test Account
+# Email: test@test.com
+# Password: password
+user = User.create(name: 'testuser', email: 'test@test.com', password: 'password')
 
 months = [1,2,3,4,5,6,7,8,9,10,11,12]
 days_in_months = [31,28,31,30,31,30,31,31,30,31,30,31]
@@ -42,3 +47,5 @@ months.each_with_index do |value, index|
                     day_number: current_day)
   end
 end
+
+puts "Seeding completed after #{((Time.now - start_time)/60).round(2)} minutes"
