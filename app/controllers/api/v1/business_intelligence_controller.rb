@@ -1,31 +1,35 @@
 class Api::V1::BusinessIntelligenceController < ApplicationController
 
   def most_visited
-    user = User.find(location_params[:user_id])
-    most_visited_arr = Location.where(user_id: user.id).group(:longitude, :latitude).count.max
-    return_value = {coordinates: {longitude: most_visited_arr[0][0], latitude: most_visited_arr[0][1]}, times_visited: most_visited_arr[1]}
-    render json: return_value
+    # user = User.find(location_params[:user_id])
+    most_visited_arr = Location.most_visited(select_user)
+    render json: format_return(most_visited_arr)
   end
 
   def least_visited
-    user = User.find(location_params[:user_id])
-    least_visited_arr = Location.where(user_id: user.id).group(:longitude, :latitude).count.min
-    return_value = {coordinates: {longitude: least_visited_arr[0][0], latitude: least_visited_arr[0][1]}, times_visited: least_visited_arr[1]}
-    render json: return_value
+    # user = User.find(location_params[:user_id])
+    least_visited_arr = Location.least_visited(select_user)
+    render json: format_return(least_visited_arr)
   end
 
   def favorite_weekday
-    user = User.find(location_params[:user_id])
-    fav_wkday_arr = Location.where(user_id: user).where(day_name: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']).group(:longitude, :latitude).count.max
-    return_value = {coordinates: {longitude: fav_wkday_arr[0][0], latitude: fav_wkday_arr[0][1]}, times_visited: fav_wkday_arr[1]}
-    render json: return_value
+    # user = User.find(location_params[:user_id])
+    fav_wkday_arr = Location.favorite_weekday(select_user)
+    render json: format_return(fav_wkday_arr)
   end
 
   def favorite_weekend
-    user = User.find(location_params[:user_id])
-    fav_wkend_arr = Location.where(user_id: user).where(day_name: ['Saturday', 'Sunday']).group(:longitude, :latitude).count.max
-    return_value = {coordinates: {longitude: fav_wkend_arr[0][0], latitude: fav_wkend_arr[0][1]}, times_visited: fav_wkend_arr[1]}
-    render json: return_value
+    # user = User.find(location_params[:user_id])
+    fav_wkend_arr = Location.favorite_weekend(select_user)
+    render json: format_return(fav_wkend_arr)
+  end
+
+  def format_return(query_response)
+    {coordinates: {longitude: query_response[0][0], latitude: query_response[0][1]}, times_visited: query_response[1]}
+  end
+
+  def select_user
+    User.find(location_params[:user_id])
   end
 
   private
