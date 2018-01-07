@@ -1,25 +1,21 @@
 class Api::V1::BusinessIntelligenceController < ApplicationController
 
   def most_visited
-    # user = User.find(location_params[:user_id])
     most_visited_arr = Location.most_visited(select_user)
     render json: format_return(most_visited_arr)
   end
 
   def least_visited
-    # user = User.find(location_params[:user_id])
     least_visited_arr = Location.least_visited(select_user)
     render json: format_return(least_visited_arr)
   end
 
   def favorite_weekday
-    # user = User.find(location_params[:user_id])
     fav_wkday_arr = Location.favorite_weekday(select_user)
     render json: format_return(fav_wkday_arr)
   end
 
   def favorite_weekend
-    # user = User.find(location_params[:user_id])
     fav_wkend_arr = Location.favorite_weekend(select_user)
     render json: format_return(fav_wkend_arr)
   end

@@ -2,9 +2,12 @@ class Api::V1::DayNumberController < ApplicationController
 
   def most_popular
     user = User.find(day_params[:user_id])
-    location = Location.where(user_id: user).where(day_number: day_params[:day_number]).group(:longitude, :latitude).count.max
-    return_value = {coordinates: {longitude: location[0][0], latitude: location[0][1]}, times_visited: location[1]}
-    render json: return_value
+    location = Location.most_popular_day_number(user, day_params[:day_number])
+    render json: format_return(location)
+  end
+
+  def format_return(query_response)
+    {coordinates: {longitude: query_response[0][0], latitude: query_response[0][1]}, times_visited: query_response[1]}
   end
 
   private
