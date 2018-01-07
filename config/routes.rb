@@ -28,4 +28,7 @@ Rails.application.routes.draw do
   get '/api/v1/day_name/least_popular/',
   :to => 'api/v1/day_name#least_popular'
 
+  get '/api/v1/day_number/most_popular/',
+  :to => 'api/v1/day_number#most_popular'
+
 end
