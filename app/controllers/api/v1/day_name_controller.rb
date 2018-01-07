@@ -6,7 +6,7 @@ class Api::V1::DayNameController < ApplicationController
   end
 
   def least_popular
-    location = Location.least_popular(select_user, day_params[:day_params])
+    location = Location.least_popular(select_user, day_params[:day_name])
     render json: format_return(location)
   end
 
