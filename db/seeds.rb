@@ -1,10 +1,51 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+puts "Starting to seed Users and Locations"
+start_time = Time.now
+
+Location.destroy_all
 User.destroy_all
 
-User.create(name: 'testuser', email: 'test@test.com', password: 'password')
+# Test Account
+# Email: test@test.com
+# Password: password
+user = User.create(name: 'testuser', email: 'test@test.com', password: 'password')
+
+months = [1,2,3,4,5,6,7,8,9,10,11,12]
+days_in_months = [31,28,31,30,31,30,31,31,30,31,30,31]
+
+location_coordinates = {turing: ["39.751073", -"104.996573"],
+                        cafe: ["39.735198", -"104.945879"],
+                        park: ["39.732920", -"104.967930"],
+                        home: ["39.734728", -"104.959488"],
+                        concert: ["39.741500", -"104.977060"],
+                        brunch: ["39.740643", -"104.949088"]}
+
+def weighted_locations(location_coordinates)
+  [location_coordinates[:turing],
+   location_coordinates[:turing],
+   location_coordinates[:turing],
+   location_coordinates[:turing],
+   location_coordinates[:home],
+   location_coordinates[:home],
+   location_coordinates[:cafe],
+   location_coordinates[:park],
+   location_coordinates[:concert],
+   location_coordinates[:brunch]].sample
+end
+
+months.each_with_index do |value, index|
+  number_of_days = days_in_months[index]
+  current_day = 1
+  number_of_days.times do
+    current_date = Date.new(2017,value,current_day).to_time
+    current_day += 1
+    Location.create(longitude: weighted_locations(location_coordinates)[0],
+                    latitude: weighted_locations(location_coordinates)[1],
+                    created_at: current_date,
+                    updated_at: current_date,
+                    user_id: user.id,
+                    day_name: current_date.strftime("%A"),
+                    day_number: current_day)
+  end
+end
+
+puts "Seeding completed after #{((Time.now - start_time)/60).round(2)} minutes"
