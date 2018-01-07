@@ -16,4 +16,10 @@ Rails.application.routes.draw do
   get '/api/v1/business_intelligence/least_visited/',
   :to => 'api/v1/business_intelligence#least_visited'
 
+  get '/api/v1/business_intelligence/favorite_weekday/',
+  :to => 'api/v1/business_intelligence#favorite_weekday'
+
+  get '/api/v1/business_intelligence/favorite_weekend/',
+  :to => 'api/v1/business_intelligence#favorite_weekend'
+
 end
