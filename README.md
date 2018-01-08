@@ -8,7 +8,7 @@ My Favorite places is a location tracking app that can predict your future locat
 * ruby 2.3.1 [link to docs](https://www.ruby-lang.org/en/)
 * JWT [link to docs](https://github.com/jwt/ruby-jwt)
 * bcrypt [link to docs](https://github.com/codahale/bcrypt-ruby)
-* Simple Command [https://github.com/nebulab/simple_command]
+* Simple Command [link to docs](https://github.com/nebulab/simple_command)
 
 ### Setup Instructions
 1. clone repo
